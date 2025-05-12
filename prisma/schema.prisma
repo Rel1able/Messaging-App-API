@@ -5,7 +5,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = env("DATABASE_URL_TEST")
 }
 
 model User {
@@ -13,16 +13,24 @@ model User {
   username         String
   password         String
   status           String    @default("Offline")
-  about            String
+  about            String?
   sentMessages     Message[] @relation("sentMessages")
   receivedMessages Message[] @relation("receivedMessages")
 }
 
 model Message {
-  id         Int    @id @default(autoincrement())
+  id         Int      @id @default(autoincrement())
   text       String
-  sender     User   @relation(name: "sentMessages", fields: [senderId], references: [id])
-  receiver   User   @relation(name: "receivedMessages", fields: [receiverId], references: [id])
+  sender     User     @relation(name: "sentMessages", fields: [senderId], references: [id])
+  receiver   User     @relation(name: "receivedMessages", fields: [receiverId], references: [id])
   senderId   Int
   receiverId Int
+  sent       DateTime
+}
+
+model Session {
+  id        String   @id
+  sid       String   @unique
+  data      String
+  expiresAt DateTime
 }
