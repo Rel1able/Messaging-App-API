@@ -1,8 +1,5 @@
 const bcrypt = require("bcryptjs");
-const db = require("../services/queries");
-const passport = require("../config/passport");
-
-
+const db = require("../services/authQueries");
 
 async function signUp(req, res, next) {
     try {
@@ -16,7 +13,6 @@ async function signUp(req, res, next) {
 }
 
 async function login(req, res) {
-    passport.authenticate("local")
     res.json({ message: "You was logged in"})
 }
 
