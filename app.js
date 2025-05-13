@@ -9,6 +9,7 @@ const PORT = process.env.PORT || 3000;
 const passport = require("./config/passport");
 const authRouter = require("./routes/authRouter");
 const messageRouter = require("./routes/messageRouter");
+const userRouter = require("./routes/userRouter");
 app.use(
     expressSession({
         cookie: {
@@ -34,7 +35,8 @@ app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 
 app.use("/auth", authRouter)
-app.use("/message", messageRouter);
+app.use("/messages", messageRouter);
+app.use("/users", userRouter);
 
 app.listen(PORT, () => {
     console.log(`App is running on port ${PORT}`)
