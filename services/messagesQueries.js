@@ -11,6 +11,26 @@ async function sendMessage(text, receiverId, senderId) {
     })
 }
 
+async function getChatMessages(senderId, receiverId) {
+    const chatMessages = await prisma.message.findMany({
+        where: {
+            OR: [
+                {
+                    senderId: +senderId,
+                    receiverId: +receiverId
+                },
+                {
+                    senderId: +receiverId,
+                    receiverId: +senderId
+                }
+            ]
+        }
+    })
+    const messagesSortedByDate = chatMessages.sort((a, b) => a.sent - b.sent)
+    return messagesSortedByDate
+}
+
 module.exports = {
-    sendMessage
+    sendMessage,
+    getChatMessages
 }

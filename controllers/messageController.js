@@ -11,6 +11,19 @@ async function createMessage(req, res) {
     }
 }
 
+async function getChatMessages(req, res) {
+    const senderId = req.user.id;
+    const receiverId = req.params.userId;
+    try {
+        const chatMessages = await db.getChatMessages(senderId, receiverId);
+        res.json({"Chat messages": chatMessages})
+        
+    } catch (err) {
+        console.error(err)
+    }
+}
+
 module.exports = {
-    createMessage
+    createMessage,
+    getChatMessages
 }
