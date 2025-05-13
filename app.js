@@ -34,6 +34,7 @@ app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 
+app.get("/ping", (req, res) => res.json({message: "Server is running"}))
 app.use("/auth", authRouter)
 app.use("/messages", messageRouter);
 app.use("/users", userRouter);
