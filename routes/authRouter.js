@@ -5,7 +5,7 @@ const passport = require("../config/passport");
 
 
 authRouter.post("/log-in", passport.authenticate("local"), authController.login)
-authRouter.post("/sign-up", authController.signUp)
+authRouter.post("/sign-up",authController.validateSignUp, authController.signUp)
 
 authRouter.get("/log-out", authController.logout);
 
