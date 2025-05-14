@@ -16,7 +16,7 @@ async function getChatMessages(req, res) {
     const receiverId = req.params.userId;
     try {
         const chatMessages = await db.getChatMessages(senderId, receiverId);
-        res.json({"Chat messages": chatMessages})
+        res.json({chatMessages})
         
     } catch (err) {
         console.error(err)
