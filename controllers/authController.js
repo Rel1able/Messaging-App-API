@@ -3,6 +3,12 @@ const db = require("../services/authQueries");
 const { body, validationResult } = require("express-validator");
 
 const validateSignUp = [
+    body("firstName")
+        .trim()
+        .isLength({ min: 3, max: 10 }).withMessage("First name must be between 3 and 10 characters long"),
+    body("lastName")
+        .trim()
+        .isLength({ min: 3, max: 10 }).withMessage("Last name must be between 3 and 10 characters long"),
     body("username")
         .trim()
         .isLength({ min: 3, max: 10 }).withMessage("Username must be between 3 and 10 characters long")
@@ -24,6 +30,7 @@ const validateSignUp = [
             if (value !== req.body.password) {
                 throw new Error("The passwords don't match.");
             }
+            return true
         })
 ]
 
@@ -31,10 +38,10 @@ async function signUp(req, res, next) {
     try {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.json({errors: errors})
+            return res.status(400).json({errors: errors.array()})
         }
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
-        await db.createUser(req.body.username, hashedPassword);
+        await db.createUser(req.body.firstName, req.body.lastName, req.body.username, hashedPassword);
         res.json({ message: "User was created" });
     } catch (err) {
         console.error(err);

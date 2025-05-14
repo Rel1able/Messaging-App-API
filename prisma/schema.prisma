@@ -10,7 +10,9 @@ datasource db {
 
 model User {
   id               Int       @id @default(autoincrement())
-  username         String
+  firstName        String
+  lastName         String
+  username         String    @unique
   password         String
   status           String    @default("Offline")
   about            String?

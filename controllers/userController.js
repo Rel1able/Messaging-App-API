@@ -5,6 +5,12 @@ async function getAllUsers(req, res) {
     res.json({users})
 }
 
+async function getUserById(req, res) {
+    const user = await db.getUserById(req.params.userId);
+    res.json({ user });
+}
+
 module.exports = {
-    getAllUsers
+    getAllUsers,
+    getUserById
 }
