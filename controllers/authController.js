@@ -50,7 +50,7 @@ async function signUp(req, res, next) {
 }
 
 async function login(req, res) {
-    res.json({ message: "You was logged in"})
+    res.json({ message: "You was logged in", user: req.user})
 }
 
 async function logout(req, res, next) {
