@@ -10,14 +10,18 @@ const passport = require("./config/passport");
 const authRouter = require("./routes/authRouter");
 const messageRouter = require("./routes/messageRouter");
 const userRouter = require("./routes/userRouter");
+app.use(cors({
+    origin: 'http://localhost:5173',
+    credentials: true
+}));
 app.use(
     expressSession({
         cookie: {
             maxAge: 7 * 24 * 60 * 60 * 1000
         },
         secret: process.env.SESSION_SECRET,
-        resave: true,
-        saveUninitialized: true,
+        resave: false,
+        saveUninitialized: false,
         store: new PrismaSessionStore(
             new PrismaClient(),
             {
@@ -28,10 +32,9 @@ app.use(
         )
     })
 )
-
 app.use(passport.session());
 app.use(express.json());
-app.use(cors());
+
 app.use(express.urlencoded({ extended: false }));
 
 app.get("/ping", (req, res) => res.json({message: "Server is running"}))
