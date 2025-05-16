@@ -24,6 +24,10 @@ async function getChatMessages(senderId, receiverId) {
                     receiverId: +senderId
                 }
             ]
+        },
+        include: {
+            receiver: true,
+            sender: true
         }
     })
     const messagesSortedByDate = chatMessages.sort((a, b) => a.sent - b.sent)

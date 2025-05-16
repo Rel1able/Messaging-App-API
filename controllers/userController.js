@@ -1,7 +1,7 @@
 const db = require("../services/userQueries");
 
 async function getAllUsers(req, res) {
-    const users = await db.getUsers();
+    const users = await db.getUsers(req.user.id);
     res.json({users})
 }
 

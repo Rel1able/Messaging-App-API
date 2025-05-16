@@ -1,7 +1,7 @@
 const { PrismaClient } = require("../generated/prisma");
 const prisma = new PrismaClient();
 
-async function getUsers() {
+async function getUsers(userId) {
     const users = await prisma.user.findMany({
         select: {
             id: true,
@@ -11,6 +11,11 @@ async function getUsers() {
             status: true,
             about: true
             
+        },
+        where: {
+            id: {
+                not: +userId
+            }
         }
     })
     return users
