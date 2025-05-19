@@ -10,7 +10,14 @@ async function getUserById(req, res) {
     res.json({ user });
 }
 
+async function getContacts(req, res) {
+    console.log("user id", req.user.id)
+    const contacts = await db.getContacts(req.user.id);
+    res.json({contacts})
+}
+
 module.exports = {
     getAllUsers,
-    getUserById
+    getUserById,
+    getContacts
 }
