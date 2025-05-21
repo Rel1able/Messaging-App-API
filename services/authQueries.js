@@ -33,8 +33,8 @@ async function createUser(firstName, lastName, username, password) {
 
 //  async function clear() {
 //     await prisma.message.deleteMany({})
-//      await prisma.user.deleteMany({});
-//      await prisma.session.deleteMany({})
+//     //  await prisma.user.deleteMany({});
+//     //  await prisma.session.deleteMany({})
 
 // }
 

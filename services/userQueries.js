@@ -93,8 +93,32 @@ async function getContacts(userId) {
     return uniqueContacts
 }
 
+async function setOnline(userId) {
+    await prisma.user.update({
+        where: {
+            id: +userId
+        },
+        data: {
+            status: "Online"
+        }
+    })
+}
+
+async function setOffline(userId) {
+    await prisma.user.update({
+        where: {
+            id: +userId
+        },
+        data: {
+            status: "Offline"
+        }
+    })
+}
+
 module.exports = {
     getUsers,
     getUserById,
-    getContacts
+    getContacts,
+    setOnline,
+    setOffline
 }

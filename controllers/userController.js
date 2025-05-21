@@ -16,8 +16,22 @@ async function getContacts(req, res) {
     res.json({contacts})
 }
 
+async function setOnline(req, res) {
+    const userId = req.params.userId;
+    await db.setOnline(userId);
+    res.json({msg: "Status of user is now online"})
+}
+
+async function setOffline(req, res) {
+    const userId = req.params.userId;
+    await db.setOffline(userId);
+    res.json({msg: "Status of user is now offline"})
+}
+
 module.exports = {
     getAllUsers,
     getUserById,
-    getContacts
+    getContacts,
+    setOnline,
+    setOffline
 }
