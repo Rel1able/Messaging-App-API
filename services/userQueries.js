@@ -115,10 +115,22 @@ async function setOffline(userId) {
     })
 }
 
+async function updateUserDescription(userId, description) {
+    await prisma.user.update({
+        where: {
+            id: +userId,
+        },
+        data: {
+            about: description
+        }
+    })
+}
+
 module.exports = {
     getUsers,
     getUserById,
     getContacts,
     setOnline,
-    setOffline
+    setOffline,
+    updateUserDescription
 }

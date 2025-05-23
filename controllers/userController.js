@@ -28,10 +28,18 @@ async function setOffline(req, res) {
     res.json({msg: "Status of user is now offline"})
 }
 
+async function updateUserDescription(req, res) {
+    const userId = req.params.userId;
+    const description = req.body.description;
+    await db.updateUserDescription(userId, description)
+    res.json({msg: "user's description updated"})
+}
+
 module.exports = {
     getAllUsers,
     getUserById,
     getContacts,
     setOnline,
-    setOffline
+    setOffline,
+    updateUserDescription
 }
