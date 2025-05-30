@@ -8,5 +8,5 @@ authRouter.post("/log-in", passport.authenticate("local"), authController.login)
 authRouter.post("/sign-up", authController.validateSignUp, authController.signUp)
 
 authRouter.get("/log-out", authController.logout);
-
+authRouter.get("/ping", authController.ping)
 module.exports = authRouter

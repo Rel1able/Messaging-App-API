@@ -62,9 +62,14 @@ async function logout(req, res, next) {
     });
 }
 
+async function ping(req, res) {
+    res.json("Server is running");
+}
+
 module.exports = {
     signUp,
     login,
     logout,
-    validateSignUp
+    validateSignUp,
+    ping
 }
