@@ -74,6 +74,9 @@ async function getContacts(userId) {
             senderId: true,
             receiverId: true
         },
+        orderBy: {
+            sent: "desc",
+        }
     })
 
     
