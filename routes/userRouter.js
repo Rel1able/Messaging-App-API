@@ -8,7 +8,7 @@ userRouter.get("/contacts", userController.getContacts)
 userRouter.get("/:userId", userController.getUserById)
 userRouter.put("/:userId/online", userController.setOnline);
 userRouter.put("/:userId/offline", userController.setOffline);
-userRouter.put("/:userId/about", userController.updateUserDescription)
+userRouter.put("/:userId/about",userController.validateDescription, userController.updateUserDescription)
 
 
 module.exports = userRouter
