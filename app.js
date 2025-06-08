@@ -11,7 +11,7 @@ const authRouter = require("./routes/authRouter");
 const messageRouter = require("./routes/messageRouter");
 const userRouter = require("./routes/userRouter");
 app.use(cors({
-    origin: 'https://messaging-app-api-gkax.onrender.com',
+    origin: 'https://messaging-app4.netlify.app',
     credentials: true
 }));
 app.use(
