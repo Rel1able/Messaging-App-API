@@ -11,7 +11,7 @@ const authRouter = require("./routes/authRouter");
 const messageRouter = require("./routes/messageRouter");
 const userRouter = require("./routes/userRouter");
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: 'https://messaging-app-api-gkax.onrender.com',
     credentials: true
 }));
 app.use(
