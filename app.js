@@ -14,6 +14,9 @@ app.use(cors({
     origin: 'https://messaging-app4.netlify.app',
     credentials: true
 }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
 app.use(
     expressSession({
         cookie: {
@@ -32,10 +35,9 @@ app.use(
         )
     })
 )
+app.use(passport.initialize());
 app.use(passport.session());
-app.use(express.json());
 
-app.use(express.urlencoded({ extended: false }));
 
 app.get("/ping", (req, res) => res.json({message: "Server is running"}))
 app.use("/auth", authRouter)
