@@ -2,6 +2,9 @@ const db = require("../services/userQueries");
 const { body, validationResult } = require("express-validator");
 
 async function getAllUsers(req, res) {
+    if (!req.user) {
+        return res.status(401).json({ error: "User not authenticated" });
+    }
     const users = await db.getUsers(req.user.id);
     res.json({users})
 }
@@ -12,6 +15,9 @@ async function getUserById(req, res) {
 }
 
 async function getContacts(req, res) {
+    if (!req.user) {
+        return res.status(401).json({ error: "User not authenticated" });
+    }
     console.log("user id", req.user.id)
     const contacts = await db.getContacts(req.user.id);
     res.json({contacts})
