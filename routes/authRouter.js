@@ -17,7 +17,7 @@ const passport = require("../config/passport");
 //     })(req, res, next)
     
 // })
-authRouter.post("/log-in", passport.authenticate("local", {session: false}, authController.createToken))
+authRouter.post("/log-in", passport.authenticate("local", {session: false}), authController.createToken)
 authRouter.post("/sign-up", authController.validateSignUp, authController.signUp)
 
 authRouter.get("/log-out", authController.logout);
