@@ -29,10 +29,3 @@ model Message {
   receiverId Int
   sent       DateTime @default(now())
 }
-
-model Session {
-  id        String   @id
-  sid       String   @unique
-  data      String
-  expiresAt DateTime
-}
