@@ -1,12 +1,10 @@
 require("dotenv").config();
+require("./config/passport");
 const express = require("express");
-const expressSession = require("express-session");
-const { PrismaSessionStore } = require("@quixo3/prisma-session-store");
-const { PrismaClient } = require("./generated/prisma");
 const app = express();
 const cors = require("cors");
 const PORT = process.env.PORT || 3000;
-const passport = require("./config/passport");
+
 const authRouter = require("./routes/authRouter");
 const messageRouter = require("./routes/messageRouter");
 const userRouter = require("./routes/userRouter");
@@ -16,28 +14,6 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
-app.use(
-    expressSession({
-        cookie: {
-            maxAge: 7 * 24 * 60 * 60 * 1000
-        },
-        secret: process.env.SESSION_SECRET,
-        resave: false,
-        saveUninitialized: false,
-        store: new PrismaSessionStore(
-            new PrismaClient(),
-            {
-                checkPeriod: 2 * 60 * 1000,
-                dbRecordIdFunction: undefined,
-                dbRecordIdIsSessionId: true
-            }
-        )
-    })
-)
-app.use(passport.initialize());
-app.use(passport.session());
-
 
 app.get("/ping", (req, res) => res.json({message: "Server is running"}))
 app.use("/auth", authRouter)

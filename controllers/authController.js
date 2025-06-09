@@ -1,6 +1,9 @@
+require("dotenv").config();
 const bcrypt = require("bcryptjs");
 const db = require("../services/authQueries");
 const { body, validationResult } = require("express-validator");
+const jwt = require("jsonwebtoken");
+const JWT_SECRET = process.env.JWT_SECRET;
 
 const validateSignUp = [
     body("firstName")
@@ -74,10 +77,22 @@ async function ping(req, res) {
     res.json("Server is running");
 }
 
+
+async function createToken(req, res) {
+    try {
+        const { id, username} = req.user;
+        const token = jwt.sign({ id: id, username: username });
+        res.status(200).json({ token, user: { id, username } });
+    } catch (err) {
+        console.error(err);
+    }
+}
+
 module.exports = {
     signUp,
     login,
     logout,
     validateSignUp,
-    ping
+    ping,
+    createToken
 }
