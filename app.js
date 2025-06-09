@@ -8,10 +8,7 @@ const PORT = process.env.PORT || 3000;
 const authRouter = require("./routes/authRouter");
 const messageRouter = require("./routes/messageRouter");
 const userRouter = require("./routes/userRouter");
-app.use(cors({
-    origin: 'https://messaging-app4.netlify.app',
-    credentials: true
-}));
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
