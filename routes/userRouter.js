@@ -4,7 +4,7 @@ const userController = require("../controllers/userController");
 const passport = require("passport");
 
 
-userRouter.get("/", userController.getAllUsers)
+userRouter.get("/",passport.authenticate("jwt", { session: false }), userController.getAllUsers)
 userRouter.get("/contacts",passport.authenticate("jwt", {session: false}), userController.getContacts)
 userRouter.get("/:userId", userController.getUserById)
 userRouter.put("/:userId/online",passport.authenticate("jwt", {session: false}), userController.setOnline);
