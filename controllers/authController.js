@@ -80,9 +80,9 @@ async function ping(req, res) {
 
 async function createToken(req, res) {
     try {
-        const { id, username} = req.user;
+        const { id, username, about, firstName, lastName, status} = req.user;
         const token = jwt.sign({ id: id, username: username });
-        res.status(200).json({ token, user: { id, username } });
+        res.status(200).json({ token, user: { id, username, about, firstName, lastName, status } });
     } catch (err) {
         console.error(err);
     }
